@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\Facades\Session;
+use App\Models\Singers;
 use DB;
 
 class DashboardPagesController extends Controller
@@ -19,9 +20,7 @@ class DashboardPagesController extends Controller
 
     public function remove_singer_from_all_tours($singer_id) {
         
-        $singer = DB::table('singers')
-        ->where('id', $singer_id)
-        ->first();
+        $singer = Singers::findOrFail($singer_id)
 
         if($singer->blkn_band_name) {
             $dash = ' - ';
