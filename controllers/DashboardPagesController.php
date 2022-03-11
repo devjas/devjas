@@ -29,7 +29,7 @@ class DashboardPagesController extends Controller
             $dash = '';
         }
 
-        UserTourSinger::>where('blkn_singer_id', $singer_id)->delete();
+        UserTourSinger::where('blkn_singer_id', $singer_id)->delete();
 
         Session::flash('success', "<b>".$singer->blkn_singer_firstname . " " . $singer->blkn_singer_lastname . $dash . $singer->blkn_band_name.'</b>' . ' has been removed from all Tours. Now you can delete this singer.');
         return redirect()->back();
