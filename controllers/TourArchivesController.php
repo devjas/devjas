@@ -20,8 +20,7 @@ class TourArchivesController extends Controller
      */
     public function index()
     {
-        $archives = DB::table('tour_archives')
-        ->join('tour_infos', 'tour_infos.id', '=', 'tour_archives.blkn_tour_id')
+        $archives = TourArchives::join('tour_infos', 'tour_infos.id', '=', 'tour_archives.blkn_tour_id')
         ->join('tour_locations', 'tour_locations.blkn_tour_id', '=', 'tour_archives.blkn_tour_id')
         ->select(
             'tour_infos.blkn_tour_title',
@@ -96,11 +95,7 @@ class TourArchivesController extends Controller
     public function update(Request $request, $id)
     {
         if($request->tour_archive) {
-            DB::table('tour_infos')
-            ->where('id', $id)
-            ->update([
-                'blkn_tour_archives' => $request->tour_archive
-            ]);
+            TourInfo::findOrFail($id)->update(['blkn_tour_archives' => $request->tour_archive]);
             $tour_archives = new TourArchives;
             $tour_archives->blkn_user_id = Auth::id();
             $tour_archives->blkn_tour_id = $id;
@@ -113,17 +108,8 @@ class TourArchivesController extends Controller
 
     public function restore_archived_tour(Request $request, $id) {
         if($request->restore_archive) {
-            DB::table('tour_infos')
-            ->where('id', $id)
-            ->update([
-                'blkn_tour_archives' => $request->restore_archive
-            ]);
-            DB::table('tour_archives')
-            ->where([
-                'tour_archives.blkn_user_id' => Auth::id(),
-                'tour_archives.blkn_tour_id' => $id
-            ])
-            ->delete();
+            TourInfo::findOrFail($id)->update(['blkn_tour_archives' => $request->restore_archive]);
+            TourArchives::where(['tour_archives.blkn_user_id' => Auth::id(),'tour_archives.blkn_tour_id' => $id])->delete();
             Session::flash('success', '<i class="fas fa-archive"></i> &nbsp; Tour RESTORED');
             return redirect('/archives');
         }
