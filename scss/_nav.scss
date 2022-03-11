@@ -1,0 +1,45 @@
+// navbar
+// navbar-list
+// list-item
+// link-item
+.navbar {
+	@include flex(true, wrap, space-between);
+	width: 100%;
+	padding: {
+		top: 1.25rem;
+		bottom: 1.25rem;
+		left: 1rem;
+		right: 1rem;
+	}
+	margin-right: auto;
+	margin-left: auto;
+	&.nav-light {
+		background: var(--nbd--bg-light);	
+	}
+	.navbar-list {
+		flex: 0 0 auto;
+		width: auto;
+		@include flex(true, wrap);
+		.list-item {
+			margin-right: 1.25rem;
+			.link-item {
+				color: var(--nbd--color-dark);
+				&:hover {
+					color: var(--nbd--color-second);
+				}
+			}
+		}
+	}
+	.nbd_container_full {
+		@include flex(true, wrap, space-between);
+		margin:0;
+		padding:0;
+	}
+	.nbd_container {
+		margin: {
+			left: auto;
+			right: auto;
+		}
+		@extend .nbd_container_full;
+	}
+}
