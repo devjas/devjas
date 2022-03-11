@@ -28,8 +28,8 @@ class TourArchivesController extends Controller
             'tour_infos.blkn_to_date',
             'tour_locations.blkn_tour_city',
             'tour_locations.blkn_tour_state',
-             'tour_infos.id',
-             'tour_archives.created_at as archive_date',
+            'tour_infos.id',
+            'tour_archives.created_at',
         )
         ->where([
             'tour_archives.blkn_user_id' => Auth::id(),
