@@ -26,11 +26,11 @@ class TourArchivesController extends Controller
             'tour_infos.blkn_tour_title',
             'tour_infos.blkn_from_date',
             'tour_infos.blkn_to_date',
-            'tour_archives.created_at',
             'tour_locations.blkn_tour_city',
             'tour_locations.blkn_tour_state',
             DB::raw(
-                'tour_infos.id as tour_id'
+                'tour_infos.id as tour_id,
+                tour_archives.created_at as archive_date'
             )
         )
         ->where([
