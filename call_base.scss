@@ -1,0 +1,82 @@
+$justify-content: (
+	center: center,
+	start: flex-start,
+	end: flex-end,
+	around: space-around,
+	between: space-between
+);
+
+@each $jc, $align in $justify-content {
+	.jc_#{$jc} {
+		justify-content: $align;
+	}
+}
+
+$text-align: start, center, end;
+@each $align in $text-align {
+	.text-#{$align} {
+		text-align: $align;
+	}
+}
+
+$p: (
+	pt: top,
+	pb: bottom,
+	ps: left,
+	pe: right,
+);
+$m: (
+	mt: top,
+	mb: bottom,
+	ms: left,
+	me: right,
+);
+
+@each $elem, $pad in $p {
+	@for $i from 0 through 5 {
+		$val: (.25 * $i);
+		@if($i == 5) {
+			$val: (.60 * $i);
+		} @else if($i == 4) {
+			$val: (.375 * $i);
+		} @else if($i == 3) {
+			$val: (.35 * $i);
+		}
+		.#{$elem}_#{$i} {
+			padding-#{$pad}: $val + rem; 
+		}
+	}
+}
+	
+@each $elem, $mar in $m {
+	@for $i from 0 through 5 {
+		$val: (.25 * $i);
+		@if($i == 5) {
+			$val: (.60 * $i);
+		} @else if($i == 4) {
+			$val: (.375 * $i);
+		} @else if($i == 3) {
+			$val: (.35 * $i);
+		}
+		.#{$elem}_#{$i} {
+			margin-#{$mar}: $val + rem; 
+		}
+	}
+}
+	
+.flex {
+	@include flex(true);
+}
+.flex_wrap {
+	flex-wrap: wrap;
+}
+.flex_nowrap {
+	flex-wrap: nowrap;
+}
+// 900 200 300 600 500 100 bold normal
+$fw: (100,200,300,500,600,900,bold,normal);
+@each $i in $fw {
+	.fw_#{$i} {
+		font-weight: $i;
+	}
+}
