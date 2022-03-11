@@ -27,7 +27,7 @@ class DashboardPagesController extends Controller
         } else {
             $dash = '';
         }
-d
+
         DB::table('user_tour_singers')
         ->where('blkn_singer_id', $singer_id)
         ->delete();
