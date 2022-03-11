@@ -19,7 +19,7 @@ class RedirectIfUserBlocked
     public function handle(Request $request, Closure $next)
     {
 
-        // Redirects user to the blocked account message
+        // Redirects user to the blocked account page
         $is_user_active = User::select('is_active')->where('id', auth()->id())->pluck('is_active');
 
         foreach($is_user_active as $is_active) {
@@ -27,7 +27,5 @@ class RedirectIfUserBlocked
                 return redirect('account-blocked');
             }
         }
-        
-        return $next($request);
     }
 }
