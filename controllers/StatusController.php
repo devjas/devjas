@@ -77,15 +77,23 @@ class StatusController extends Controller
     public function update(Request $request, $id)
     {
         if($request->tour_publishing) {
+            
             TourInfo::where('id', $id)->update(['blkn_tour_publishing' => $request->tour_publishing]);
+            
             $get_publishing_status = $request->tour_publishing == 1 ? '<span class="fw-500"><i class="fas fa-check"></i>&nbsp; Tour PUBLISHED</span>' : '<span class="fw-500"><i class="fas fa-exclamation-triangle"></i>&nbsp; Tour UNPUBLISHED</span>';
             $status_option = $request->tour_publishing == 1 ? 'success' : 'error';
+            
             Session::flash($status_option, $get_publishing_status);
+            
         } else if($request->tour_cancelling) {
+            
             TourInfo::where('id', $id)->update(['blkn_tour_cancel' => $request->tour_cancelling]);
+            
             $get_cancelling_status = $request->tour_cancelling == 1 ? '<span class="fw-500"><i class="fas fa-exclamation-triangle"></i>&nbsp; Tour CANCELLED</span>' : '<span class="fw-500"><i class="fas fa-check"></i>&nbsp; Tour RESUMED</span>';
             $status_option = $request->tour_cancelling == 1 ? 'error' : 'success';
+            
             Session::flash($status_option, $get_cancelling_status);
+            
         }
         return redirect()->back();
     }
