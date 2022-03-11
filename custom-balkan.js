@@ -121,11 +121,6 @@ class Price {
 	enteredPrice() {
 		document.getElementById('enteredPrice').textContent = adult_price.value;
 	}
-	adultPrice() {
 
-	}
-	childrenPrice() {
-
-	}
 }
 const price = new Price;
