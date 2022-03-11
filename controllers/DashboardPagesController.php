@@ -23,11 +23,7 @@ class DashboardPagesController extends Controller
         
         $singer = Singers::findOrFail($singer_id)
 
-        if($singer->blkn_band_name) {
-            $dash = ' - ';
-        } else {
-            $dash = '';
-        }
+        $singer->blkn_band_name ? $dash = ' - ' : $dash = '';
 
         UserTourSinger::where('blkn_singer_id', $singer_id)->delete();
 
