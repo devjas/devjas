@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\Facades\Session;
 use App\Models\Singers;
+use App\Models\UserTourSinger;
 use DB;
 
 class DashboardPagesController extends Controller
@@ -28,9 +29,7 @@ class DashboardPagesController extends Controller
             $dash = '';
         }
 
-        DB::table('user_tour_singers')
-        ->where('blkn_singer_id', $singer_id)
-        ->delete();
+        UserTourSinger::>where('blkn_singer_id', $singer_id)->delete();
 
         Session::flash('success', "<b>".$singer->blkn_singer_firstname . " " . $singer->blkn_singer_lastname . $dash . $singer->blkn_band_name.'</b>' . ' has been removed from all Tours. Now you can delete this singer.');
         return redirect()->back();
