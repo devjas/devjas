@@ -9,6 +9,8 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 use DB;
 use App\Models\TourInfo;
+use App\Models\UserTourSinger;
+use App\Models\DeletedTour;
 
 class StatusController extends Controller
 {
@@ -97,8 +99,7 @@ class StatusController extends Controller
     public function destroy($id)
     {
 
-        $deleted_tour = DB::table('user_tour_singers')
-        ->join('tour_infos','tour_infos.id','=','user_tour_singers.blkn_tour_id')
+        $deleted_tour = UserTourSinger::join('tour_infos','tour_infos.id','=','user_tour_singers.blkn_tour_id')
         ->join('tour_ages','tour_ages.blkn_tour_id','=','user_tour_singers.blkn_tour_id')
         ->join('tour_contacts','tour_contacts.blkn_tour_id','=','user_tour_singers.blkn_tour_id')
         ->join('tour_locations','tour_locations.blkn_tour_id','=','user_tour_singers.blkn_tour_id')
@@ -144,8 +145,7 @@ class StatusController extends Controller
         ->first();
 
 
-        $find_singers = DB::table('user_tour_singers')
-        ->join('singers','singers.id', '=', 'user_tour_singers.blkn_singer_id')
+        $find_singers = UserTourSinger::join('singers','singers.id', '=', 'user_tour_singers.blkn_singer_id')
         ->select(
             'singers.blkn_singer_firstname',
             'singers.blkn_singer_lastname',
@@ -220,11 +220,7 @@ class StatusController extends Controller
 
         $data_encoded = json_encode($deleted_tour_json_data);
 
-        DB::table('deleted_tours')
-        ->insert([
-             'deleted_tour' => $data_encoded
-        ]);
-
+        DeletedTour::insert(['deleted_tour' => $data_encoded]);
 
         $tour_info = TourInfo::findOrFail($id);
         $tour_info->delete();
