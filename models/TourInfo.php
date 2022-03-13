@@ -9,4 +9,12 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class TourInfo extends Model
 {
     use HasFactory, SoftDeletes;
+    
+    public function getBlknFromDateAttribute($value) {
+        return Carbon::parse($value)->format('m/d/Y');
+    } 
+
+    public function getBlknToDateAttribute($value) {
+        return Carbon::parse($value)->format('m/d/Y');
+    } 
 }
