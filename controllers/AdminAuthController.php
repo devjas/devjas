@@ -40,14 +40,13 @@ class AdminAuthController extends Controller
             'password' => ['required'],
         ]);
 
+        if()
         if(Auth::guard('admin')->attempt(['email'=>$request->email, 'password'=>$request->password, 'is_active'=>1])) {
             $request->session()->regenerate();
             return redirect()->intended(route('admin-dashboard'));
         }
 
-        return back()->withErrors([
-            'email' => 'The provided credentials do not mach our records.'
-        ]);
+        return back()->withErrors($credentials);
     }
 
     public function getLogin() {
