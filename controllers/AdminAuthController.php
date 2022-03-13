@@ -40,10 +40,7 @@ class AdminAuthController extends Controller
             'password' => ['required'],
         ]);
 
-        if(Auth::guard('admin')->attempt([
-            'email'=>$request->email,
-            'password'=>$request->password,
-            'is_active'=>1])) {
+        if(Auth::guard('admin')->attempt(['email' => $request->email, 'password' => $request->password, 'is_active' => 1])) {
             
             $request->session()->regenerate();
             
