@@ -121,7 +121,7 @@ class TourArchivesController extends Controller
      */
     public function destroy($id)
     {
-        TourInfos::findOrFail($id)->delete();
+        TourInfos::find($id)->delete();
         Session::flash('success', 'Archive and a Tour successfuly deleted.');
         return redirect('/archives');
 
