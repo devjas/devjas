@@ -41,8 +41,13 @@ class AdminAuthController extends Controller
         ]);
 
         if()
-        if(Auth::guard('admin')->attempt(['email'=>$request->email, 'password'=>$request->password, 'is_active'=>1])) {
+        if(Auth::guard('admin')->attempt([
+            'email'=>$request->email,
+            'password'=>$request->password,
+            'is_active'=>1])) {
+            
             $request->session()->regenerate();
+            
             return redirect()->intended(route('admin-dashboard'));
         }
 
