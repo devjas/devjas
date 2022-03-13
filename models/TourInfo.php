@@ -8,7 +8,5 @@ Illuminate\Database\Eloquent\SoftDeletes
 
 class TourInfo extends Model
 {
-    use HasFactory; 
-
-    use SoftDeletes;
+    use HasFactory, SoftDeletes;
 }
