@@ -40,7 +40,6 @@ class AdminAuthController extends Controller
             'password' => ['required'],
         ]);
 
-        if()
         if(Auth::guard('admin')->attempt([
             'email'=>$request->email,
             'password'=>$request->password,
