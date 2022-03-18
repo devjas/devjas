@@ -1,5 +1,4 @@
-- 👋 Hi, I’m @devjas
-- 👀 I’m interested in PHP, Laravel framework, JavaScript, jQuery, HTML, CSS, SCSS ...
+These are some of the files from my current website project.
 
 <!---
 devjas/devjas is a ✨ special ✨ repository because its `README.md` (this file) appears on your GitHub profile.
